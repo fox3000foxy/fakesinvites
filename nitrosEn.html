@@ -18,7 +18,7 @@
 		position:absolute;
 		left:5%;
 		top:5%;
-		width:95%;
+		width:90%;
 		height:95%;
 		text-align:center
 	">
@@ -90,19 +90,19 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	
+
 	imgInp.onchange = ()=>{
 		readURL(imgInp)
 	}
-		  
+
 	  options.type.addEventListener('change',()=>{
 		<!-- console.log("update") -->
 			if(options.type.value=="custom")
 				customForm.style.display = ''
-			else	
+			else
 				customForm.style.display = 'none'
 	  })
-	
+
 	function makeid(length) {
 		var result           = '';
 		var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -270,10 +270,10 @@
         background-size: cover;
       }
 
-      fieldset {
-        padding: 15px;
-        border: 1px solid white
-      }
+            fieldset {
+				padding:15px;
+                border: 1px solid white
+            }
     </style>
   </div>
 </body>
