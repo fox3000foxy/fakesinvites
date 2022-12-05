@@ -22,6 +22,7 @@
 		height:95%;
 		text-align:center
 	">
+    <a href="nitros.html">Français ?</a><br>
     <a href="indexEn.html">Searching invites pranks ?</a><br>
     <!-- padding:15% -->
     <form id="options">
@@ -36,14 +37,21 @@
         </select><br>
         Display: <select name="scape" class="inputDefault-_djjkz input-cIJ7To"
           style="width:20%;height:40px;overflow:hidden" size=1 selectedIndex=1>
-          <option value="horizontal">Horizontal</option>
           <option value="vertical">Vertical</option>
+          <option value="horizontal">Horizontal</option>
         </select><br>
         Type: <select name="type" class="inputDefault-_djjkz input-cIJ7To" style="width:20%;height:40px;overflow:hidden"
           size=1 selectedIndex=1>
           <option value="boost">Nitro</option>
           <option value="classic">Nitro Classic</option>
-        </select><br>
+          <option value="custom">Custom app</option>
+        </select>
+		<div id="customForm" style="display:none;">
+		<br>
+		Name of app: <input class="inputDefault-_djjkz input-cIJ7To" style="width:15%" id="appName"
+          placeholder="Name of app" value=""><br>
+		  Image: <input type='file' id="imgInp" />
+		</div>
       </fieldset>
     </form><button onclick="update()" class="green" style="width:20%">Update</button><br><br>
     <!--        <table>
@@ -66,10 +74,47 @@
             </tr>
         </table> -->
     <br> <br>
-    <span>Dont forget to share this image with giving <a href="javascript:void(0)">&lt;https://discord.gift\(random
-        hash)&gt;</a> as link for disable original view !</span><br>
+    <span>Dont forget to share this image with giving <a
+        href="" id="randomCodeA">&lt;https://discord.gift\<span id="randomCode"></span>&gt</a> as link for disable original view !</span><br>
     <button onclick="downloadURI(dataURIToSave,options.name.value)" class="green" style="width:20%">Save</button>
     <script>
+		customImage = null
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				customImage = e.target.result
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
+	imgInp.onchange = ()=>{
+		readURL(imgInp)
+	}
+		  
+	  options.type.addEventListener('change',()=>{
+		<!-- console.log("update") -->
+			if(options.type.value=="custom")
+				customForm.style.display = ''
+			else	
+				customForm.style.display = 'none'
+	  })
+	
+	function makeid(length) {
+		var result           = '';
+		var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		var charactersLength = characters.length;
+		for ( var i = 0; i < length; i++ ) {
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		}
+		return result;
+	}
+	let code = (makeid(16))
+	randomCodeA.href = "https://discord.gift\\"+code
+	randomCode.innerText = code
       function update() {
         setTimeout(() => {
           params.name = options.name.value
@@ -111,13 +156,13 @@
             <div class="tile-2mmK5T tileHorizontal-1DBMDZ embedHorizontal-2GF6zV" style="background: #18191c">
                 <div class="media-1cVFCz mediaHorizontal-1eDgDq">
                     <figure class="splashContainer-Bv4lwJ splashContainerHorizontal-2KmXEq">
-                        <div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;"><div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;background-image: url(${params.type == "boost" ? NitroDataURI : NitroClassicDataURI});background-size:cover;
+                        <div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;"><div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;background-image: url(${params.type == "boost" ? NitroDataURI : (params.type == "classic"?NitroClassicDataURI:customImage)});background-size:cover;
 "></div></div>
                     </figure>
                 </div>
                 <div class="description-X8_53U">
                     <h2 class="title-oJa_A6">You've been gifted a subscription!</h2>
-                    <div class="tagline-3DhQWg"><b>${params.name}</b> has gifted Nitro ${params.type == "classic" ? "Classic " : ""}for <b>1 ${params.expiresAt == "monthly" ? "month" : "year"}</b></div>
+                    <div class="tagline-3DhQWg"><b>${params.name}</b> has gifted ${params.type != "custom"?"Nitro"+(params.type=="classic"?" Classic ":"")+(params.type=="basic"?" Basic ":""):appName.value} for <b>1 ${params.expiresAt == "monthly" ? "month" : "year"}</b></div>
                     <div class="actions-3Gkxv6">
                         <div class="tileActions-VUBz_1">
                             <div class="flex-2S1XBF flex-3BkGQD horizontal-112GEH horizontal-1Piu5- flex-3BkGQD directionRow-2Iu2A9 justifyBetween-wAERV6 alignStretch-Uwowzr noWrap-hBpHBz" style="flex: 1 1 auto;">
@@ -146,13 +191,13 @@
                                     <div class="tile-2mmK5T embedVertical-2vpt72" style="background: #18191c">
                                         <div class="media-1cVFCz">
                                             <figure class="splashContainer-Bv4lwJ">
-                                                <div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;"><div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;background-image: url(${params.type == "boost" ? NitroDataURI : NitroClassicDataURI});background-size:cover;
+                                                <div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;"><div class="splash-PDbb7Y splashVideo-uVbleJ" style="opacity: 1;background-image: url(${params.type == "boost" ? NitroDataURI : (params.type == "classic"?NitroClassicDataURI:customImage)});background-size:cover;
 "></div>
                                             </figure>
                                         </div>
                                         <div class="description-X8_53U">
                                             <h2 class="title-oJa_A6">You've been gifted a subscription!</h2>
-                                            <div class="tagline-3DhQWg"><b>${params.name}</b> has gifted Nitro ${params.type == "classic" ? "Classic " : ""}for <b>1 ${params.expiresAt == "monthly" ? "month" : "year"}</b></div>
+                                            <div class="tagline-3DhQWg"><b>${params.name}</b> has gifted ${params.type != "custom"?"Nitro"+(params.type=="classic"?" Classic ":"")+(params.type=="basic"?" Basic ":""):appName.value} for <b>1 ${params.expiresAt == "monthly" ? "month" : "year"}</b></div>
                                             <div class="actions-3Gkxv6">
                                                 <div class="tileActions-VUBz_1">
                                                     <div class="flex-2S1XBF flex-3BkGQD horizontal-112GEH horizontal-1Piu5- flex-3BkGQD directionRow-2Iu2A9 justifyBetween-wAERV6 alignStretch-Uwowzr noWrap-hBpHBz" style="flex: 1 1 auto;">
